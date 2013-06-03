@@ -86,6 +86,10 @@ class Opencv < Formula
     end
   end
 
+  def patches
+    DATA
+  end
+
   def which_python
     "python" + `python -c 'import sys;print(sys.version[:3])'`.strip
   end
@@ -102,3 +106,33 @@ class Opencv < Formula
     EOS
   end
 end
+
+__END__
+diff --git a/modules/ocl/include/opencv2/ocl/private/util.hpp b/modules/ocl/include/opencv2/ocl/private/util.hpp
+index 62e69a8..2b57ea9 100644
+--- a/modules/ocl/include/opencv2/ocl/private/util.hpp
++++ b/modules/ocl/include/opencv2/ocl/private/util.hpp
+@@ -49,7 +49,7 @@
+ #include "opencv2/ocl/ocl.hpp"
+ 
+ #if defined __APPLE__
+-#include <OpenCL/OpenCL.h>
++#include <OpenCL/opencl.h>
+ #else
+ #include <CL/opencl.h>
+ #endif
+diff --git a/modules/ocl/src/safe_call.hpp b/modules/ocl/src/safe_call.hpp
+index 441495f..ba36cab 100644
+--- a/modules/ocl/src/safe_call.hpp
++++ b/modules/ocl/src/safe_call.hpp
+@@ -47,7 +47,7 @@
+ #define __OPENCV_OPENCL_SAFE_CALL_HPP__
+ 
+ #if defined __APPLE__
+-#include <OpenCL/OpenCL.h>
++#include <OpenCL/opencl.h>
+ #else
+ #include <CL/cl.h>
+ #endif
+
+
